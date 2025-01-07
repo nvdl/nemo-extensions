@@ -50,7 +50,7 @@ class AudioPropertyPage(GObject.GObject, Nemo.PropertyPageProvider, Nemo.NameAnd
 
         self.builder = Gtk.Builder()
         self.builder.set_translation_domain('nemo-extensions')
-        self.builder.add_from_file("~/.local/share/nemo-python/extensions/nemo-audio-tab.glade")
+        self.builder.add_from_file(os.path.expanduser("~/.local/share/nemo-python/extensions/nemo-audio-tab.glade"))
 
         #connect gtk objects to python variables
         for obj in self.builder.get_objects():
