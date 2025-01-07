@@ -1,3 +1,7 @@
+# About This Fork
+* Use explicit versions for PyGObject in "nemo-emblems.py".
+* Support the loading of the GUI file from "~/.local/share/nemo-python/extensions" for "nemo-audio-tab.py".
+
 # Nemo Extensions
 
 ## Status
