@@ -7,6 +7,10 @@ from urllib import parse
 import locale, gettext, os
 import mutagen
 
+import gi
+gi.require_version('Gtk', '3.0')
+gi.require_version('Nemo', '3.0')
+
 from gi.repository import GObject, Gio, Gtk, Nemo
 # for id3 support
 from mutagen.easyid3 import EasyID3
@@ -46,7 +50,7 @@ class AudioPropertyPage(GObject.GObject, Nemo.PropertyPageProvider, Nemo.NameAnd
 
         self.builder = Gtk.Builder()
         self.builder.set_translation_domain('nemo-extensions')
-        self.builder.add_from_file("/usr/share/nemo-audio-tab/nemo-audio-tab.glade")
+        self.builder.add_from_file("~/.local/share/nemo-python/extensions/nemo-audio-tab.glade")
 
         #connect gtk objects to python variables
         for obj in self.builder.get_objects():
@@ -68,7 +72,7 @@ class AudioPropertyPage(GObject.GObject, Nemo.PropertyPageProvider, Nemo.NameAnd
         file.add_string_attribute('encodedby', '')
         file.add_string_attribute('copyright', '')
 
-        no_info = _("No Info")
+        no_info = _("-")
         mutaFile = mutagen.File(filename)
 
         #MP3
@@ -112,7 +116,7 @@ class AudioPropertyPage(GObject.GObject, Nemo.PropertyPageProvider, Nemo.NameAnd
             try:
                 with open(filename, 'rb') as mpfile:
                     mpinfo = MP3(mpfile).info
-                    file.add_string_attribute('bitrate', str(mpinfo.bitrate/1000) + " Kbps")
+                    file.add_string_attribute('bitrate', str(mpinfo.bitrate/1000) + " kbps")
 
                     file.add_string_attribute('samplerate', str(mpinfo.sample_rate) + " Hz")
                     # [SabreWolfy] added consistent formatting of times in format hh:mm:ss
